@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'accounts/styles/astyles.css' %}"/>
+    <title>Document</title>
+</head>
+<body>
+<header class="main-header wrapper">
+    <h2>ژورنالتو</h2>
+</header>
+<div class="container wrapper">
+    <div class="side-menu box">
+        <nav>
+            <ul>
+                <li>
+                    <div class="active">
+                        <img
+                                src="{% static 'accounts/assets/icons/home.svg' %}"
+                                alt="home icon"
+                        />
+                    </div>
+                    <span>خانه</span>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 826.svg' %}"
+                                alt="notif icon"
+                        />
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 827.svg' %}"
+                                alt="user icon"
+                        />
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 828.svg' %}"
+                                alt="more icon"
+                        />
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+        <div class="comment-box box">
+            <textarea placeholder="چه خبرا؟ ..."></textarea>
+            <div class="upload-box">
+                <div class="image-input">
+                    <label for="image">
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 830.svg' %}"
+                                alt="camera icon"
+                        />
+                    </label>
+                    <input accept=".jpg,.png" type="file" id="image"/>
+                </div>
+                <button class="btn">بفرست</button>
+            </div>
+        </div>
+        <section>
+            <div class="post">
+                <div class="user-info">
+                    <img
+                            class="user-image"
+                            src="{% static 'accounts/assets/images/user.jpg' %}"
+                            alt="user image"
+                    />
+
+                    <div class="detail">
+                        <h3>پیری</h3>
+                        <p>خروسای دانشکده مهندسی:</p>
+                    </div>
+                </div>
+                <div class="post-image">
+                    <img src="{% static 'accounts/assets/images/post1.png' %}" alt="roster"/>
+                </div>
+                <div class=" actions">
+                    <ul>
+                        <li><span>120 👍</span></li>
+                        <li><span>960 👀</span></li>
+                        <li><span>120 ❤️</span></li>
+                        <li><span>+</span></li>
+                    </ul>
+                </div>
+                <div class="comment-input">
+                    <input type="text" placeholder="به نظر من..."/>
+                    <button class="btn">کامنت بذار</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="profile box">
+        <img src="{% static 'accounts/assets/images/user.jpg' %}" alt="user image"/>
+        <span>پیری</span>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+@import url(fonts.css);
+
+:root {
+    --color-orange: #ed7549;
+    --color-white: #ffffff;
+    --color-black: #001d3d;
+    --color-background-1: #f9f7ee;
+
+    --border-radius-1: 32px;
+    --border-radius-2: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a,
+a:active,
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+body {
+    font-family: "iransansRegular";
+    background-color: var(--color-background-1);
+    background-image: linear-gradient(#e3e2de 4px, transparent 4px),
+    linear-gradient(90deg, #e3e2de 4px, transparent 4px),
+    linear-gradient(#e3e2de 4px, transparent 4px),
+    linear-gradient(90deg, #e3e2de 4px, #f9f7ee 4px);
+    background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
+    background-position: -4px -4px, -4px -4px, -4px -4px, -4px -4px;
+}
+
+li {
+    list-style: none;
+}
+
+.box {
+    border: 2px solid var(--color-black);
+    box-shadow: 4px 6px 0px 0px #001429;
+    border-radius: var(--border-radius-1);
+}
+
+.btn {
+    color: var(--color-white);
+    background-color: var(--color-orange);
+    border-radius: var(--border-radius-1);
+    box-shadow: 2px 4px 0px 0px #001429;
+    border: 2px solid var(--color-black);
+    font-family: "iransansBold";
+    font-size: 16px;
+    padding: 16px 32px;
+    cursor: pointer;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2 {
+    font-size: 88px;
+    font-family: "javan";
+    line-height: 48px;
+    margin: 48px 0;
+}
+
+h3 {
+    font-size: 40px;
+    font-family: "hilda";
+    margin-bottom: 48px;
+}
+
+/* login box */
+.login-box {
+    background-color: var(--color-white);
+    border-radius: var(--border-radius-1);
+    padding: 48px;
+    width: 600px;
+    /* height: 500px; */
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    border: 2px solid #00142999;
+    padding: 12px 16px;
+    width: 100%;
+    font-size: 24px;
+    border-radius: var(--border-radius-1);
+    line-height: 32px;
+    font-family: "iransansRegular";
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.login-box .input-box label {
+    font-size: 24px;
+}
+
+.login-box form button {
+    margin-top: 48px;
+    justify-self: flex-end
+}
