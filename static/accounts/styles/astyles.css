@@ -1,250 +1,287 @@
 @import url(fonts.css);
-:root {
-	--color-orange: #ed7549;
-	--color-white: #ffffff;
-	--color-black: #001d3d;
-	--color-background-1: #f9f7ee;
 
-	--border-radius-1: 32px;
-	--border-radius-2: 16px;
+:root {
+    --color-orange: #ed7549;
+    --color-white: #ffffff;
+    --color-black: #001d3d;
+    --color-background-1: #f9f7ee;
+
+    --border-radius-1: 32px;
+    --border-radius-2: 16px;
 }
+
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 a,
 a:active,
 a:visited {
-	color: black;
-	text-decoration: none;
+    color: black;
+    text-decoration: none;
 }
+
 body {
-	font-family: "iransansRegular";
-	background-color: var(--color-background-1);
-	background-image: linear-gradient(#e3e2de 4px, transparent 4px),
-		linear-gradient(90deg, #e3e2de 4px, transparent 4px),
-		linear-gradient(#e3e2de 4px, transparent 4px),
-		linear-gradient(90deg, #e3e2de 4px, #f9f7ee 4px);
-	background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
-	background-position: -4px -4px, -4px -4px, -4px -4px, -4px -4px;
+    font-family: "iransansRegular";
+    background-color: var(--color-background-1);
+    background-image: linear-gradient(#e3e2de 4px, transparent 4px),
+    linear-gradient(90deg, #e3e2de 4px, transparent 4px),
+    linear-gradient(#e3e2de 4px, transparent 4px),
+    linear-gradient(90deg, #e3e2de 4px, #f9f7ee 4px);
+    background-size: 200px 200px, 200px 200px, 40px 40px, 40px 40px;
+    background-position: -4px -4px, -4px -4px, -4px -4px, -4px -4px;
 }
+
 li {
-	list-style: none;
+    list-style: none;
 }
+
 .box {
-	border: 2px solid var(--color-black);
-	box-shadow: 4px 6px 0px 0px #001429;
-	border-radius: var(--border-radius-1);
+    border: 2px solid var(--color-black);
+    box-shadow: 4px 6px 0px 0px #001429;
+    border-radius: var(--border-radius-1);
 }
+
 .btn {
-	color: var(--color-white);
-	background-color: var(--color-orange);
-	border-radius: var(--border-radius-1);
-	box-shadow: 2px 4px 0px 0px #001429;
-	border: 2px solid var(--color-black);
-	font-family: "iransansBold";
-	font-size: 16px;
-	padding: 16px 32px;
-	cursor: pointer;
+    color: var(--color-white);
+    background-color: var(--color-orange);
+    border-radius: var(--border-radius-1);
+    box-shadow: 2px 4px 0px 0px #001429;
+    border: 2px solid var(--color-black);
+    font-family: "iransansBold";
+    font-size: 16px;
+    padding: 16px 32px;
+    cursor: pointer;
 }
+
 /* header */
 .main-header {
-	width: 100%;
+    width: 100%;
 }
+
 .main-header h2 {
-	font-family: "javan";
-	color: var(--color-black);
-	font-size: 48px;
+    font-family: "javan";
+    color: var(--color-black);
+    font-size: 48px;
 }
+
 /* container */
 .container {
-	display: flex;
-	gap: 48px;
-	align-items: start;
+    display: flex;
+    gap: 48px;
+    align-items: start;
 }
 
 /* side menu */
 .side-menu {
-	padding: 32px 40px;
-	background-color: var(--color-white);
+    padding: 32px 40px;
+    background-color: var(--color-white);
 }
+
 .side-menu nav ul {
-	display: flex;
-	flex-direction: column;
-	gap: 32px;
-	align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
 }
+
 .side-menu li span {
-	font-family: "iransansBold";
-	font-size: 24px;
+    font-family: "iransansBold";
+    font-size: 24px;
 }
+
 .side-menu nav li {
-	display: flex;
-	flex-direction: column;
-	gap: 12px;
-	align-items: center;
-	cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
 }
+
 .side-menu .active {
-	background-color: var(--color-orange);
-	border-radius: 100%;
-	width: 64px;
-	height: 64px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    background-color: var(--color-orange);
+    border-radius: 100%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wrapper {
-	max-width: 1280px;
-	margin: auto;
+    max-width: 1280px;
+    margin: auto;
 }
 
 /* main section */
 main {
-	flex-grow: 1;
+    flex-grow: 1;
 }
+
 /* comment box */
 .comment-box {
-	padding: 16px;
-	margin-bottom: 32px;
-	background-color: var(--color-white);
+    padding: 16px;
+    margin-bottom: 32px;
+    background-color: var(--color-white);
 }
+
 .comment-box textarea {
-	width: 100%;
-	height: 323px;
-	resize: none;
-	font-family: "hilda";
-	font-size: 24px;
-	background: #00509d1a;
-	border-radius: 24px;
-	border: none;
-	outline: none;
-	padding: 16px;
+    width: 100%;
+    height: 323px;
+    resize: none;
+    font-family: "hilda";
+    font-size: 24px;
+    background: #00509d1a;
+    border-radius: 24px;
+    border: none;
+    outline: none;
+    padding: 16px;
 }
+
 .comment-box .upload-box {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
 .upload-box .image-input label {
-	cursor: pointer;
+    cursor: pointer;
 }
+
 .upload-box .image-input input {
-	display: none;
+    display: none;
 }
+
 /* profile */
 .profile {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	gap: 16px;
-	padding: 32px 80px;
-	background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 80px;
+    background-color: var(--color-white);
 }
+
 .profile img {
-	width: 72px;
-	border: 3px solid #0c0d0f;
-	border-radius: var(--border-radius-2);
+    width: 72px;
+    border: 3px solid #0c0d0f;
+    border-radius: var(--border-radius-2);
 }
+
 .profile span {
-	font-family: "iransansBold";
-	font-size: 20px;
+    font-family: "iransansBold";
+    font-size: 20px;
 }
+
 /* post section */
 .post {
-	background-color: var(--color-background-1);
-	border: 3px solid var(--color-black);
-	border-radius: var(--border-radius-1);
-	padding: 24px;
+    background-color: var(--color-background-1);
+    border: 3px solid var(--color-black);
+    border-radius: var(--border-radius-1);
+    padding: 24px;
+    margin-bottom: 32px;
 }
+
 .post .user-info {
-	display: flex;
-	align-items: center;
-	gap: 24px;
-	margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
 }
+
 .user-info .user-image {
-	width: 72px;
-	border: 3px solid #0c0d0f;
-	border-radius: var(--border-radius-2);
+    width: 72px;
+    border: 3px solid #0c0d0f;
+    border-radius: var(--border-radius-2);
 }
+
 .user-info .detail {
-	display: flex;
-	flex-direction: column;
-	justify-content: start;
-	gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 8px;
 }
+
 .post-image {
-	background-color: var(--color-white);
-	padding: 20px;
-	position: relative;
+    background-color: var(--color-white);
+    padding: 20px;
+    position: relative;
 }
+
 .post-image img {
-	width: 100%;
+    width: 100%;
 }
+
 .post-image::before,
 .post-image::after {
-	content: "";
-	display: block;
-	background-color: #e5c282cc;
-	width: 72px;
-	height: 22px;
-	transform: rotate(45deg);
-	position: absolute;
+    content: "";
+    display: block;
+    background-color: #e5c282cc;
+    width: 72px;
+    height: 22px;
+    transform: rotate(45deg);
+    position: absolute;
 }
+
 .post-image::before {
-	top: 10px;
-	right: -10px;
+    top: 10px;
+    right: -10px;
 }
+
 .post-image::after {
-	bottom: 20px;
-	left: -10px;
+    bottom: 20px;
+    left: -10px;
 }
 
 /* post actions */
 .post .actions {
-	margin-top: 32px;
-	position: relative;
-	padding-bottom: 32px;
-	border-bottom: 2px dashed #00142966;
+    margin-top: 32px;
+    position: relative;
+    padding-bottom: 32px;
+    border-bottom: 2px dashed #00142966;
 }
+
 .post .actions::after {
-	content: url("../assets/icons/thumbs.svg");
-	position: absolute;
-	top: -50%;
-	left: -70px;
+    content: url("../assets/icons/thumbs.svg");
+    position: absolute;
+    top: -50%;
+    left: -70px;
 }
+
 .post .actions ul {
-	display: flex;
-	gap: 12px;
+    display: flex;
+    gap: 12px;
 }
+
 .post .actions ul li {
-	border-radius: var(--border-radius-1);
-	background-color: var(--color-white);
-	border: 2px solid var(--color-black);
-	box-shadow: 2px 4px 0px 0px var(--color-black);
-	color: var(--color-black);
-	padding: 16px 32px;
-	font-size: 16px;
-	font-family: "iransansBold";
-	cursor: pointer;
+    border-radius: var(--border-radius-1);
+    background-color: var(--color-white);
+    border: 2px solid var(--color-black);
+    box-shadow: 2px 4px 0px 0px var(--color-black);
+    color: var(--color-black);
+    padding: 16px 32px;
+    font-size: 16px;
+    font-family: "iransansBold";
+    cursor: pointer;
 }
+
 /* comment input */
 
 .comment-input {
-	margin-top: 32px;
-	display: flex;
-	gap: 12px;
+    margin-top: 32px;
+    display: flex;
+    gap: 12px;
 }
+
 .comment-input input {
-	border: 2px solid #00142999;
-	padding: 12px 16px;
-	font-family: "hilda";
-	font-size: 24px;
-	border-radius: var(--border-radius-1);
-	line-height: 32px;
-	/* width: 100%; */
-	flex-grow: 1;
+    border: 2px solid #00142999;
+    padding: 12px 16px;
+    font-family: "hilda";
+    font-size: 24px;
+    border-radius: var(--border-radius-1);
+    line-height: 32px;
+    /* width: 100%; */
+    flex-grow: 1;
 }

@@ -44,3 +44,17 @@ class LoginForm(forms.Form):
         })
         for field_name, placeholder in placeholder_text.items():
             self.fields[field_name].widget.attrs.update({'class': '', 'placeholder': placeholder})
+
+
+class PostForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['image'].widget.attrs.update({'id': 'image'})
+
+    # self.fields['body'].widget.attrs.update({'placeholder': 'چه خبرا؟'})
+    #
+    # my_text_area = forms.CharField(widget=forms.Textarea)
+    body = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'چه خبرا؟'}), label='')
+    image = forms.ImageField(required=False)
+
+    # username = forms.CharField(max_length=100, label="")

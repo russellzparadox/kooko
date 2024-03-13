@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'accounts/styles/astyles.css' %}"/>
+    {% block style %}
+    {% endblock %}
+    <title>Document</title>
+</head>
+<body>
+<header class="main-header wrapper">
+    <h2>ژورنالتو</h2>
+</header>
+<div class="container wrapper">
+    <div class="side-menu box">
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'index' %}" style="display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  cursor: pointer;">
+                        <div class="active">
+                            <img
+                                    src="{% static 'accounts/assets/icons/home.svg' %}"
+                                    alt="home icon"
+                            />
+                        </div>
+                        <span>خانه</span>
+                    </a>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 826.svg' %}"
+                                alt="notif icon"
+                        />
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 827.svg' %}"
+                                alt="user icon"
+                        />
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <img
+                                src="{% static 'accounts/assets/icons/Frame 828.svg' %}"
+                                alt="more icon"
+                        />
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <div class="profile box">
+        {% if user.is_authenticated %}
+            <img src="{{ user.picture.url }}" alt="user image">
+            {#        <img src="{% static 'accounts/assets/images/user.jpg' %}" alt="user image"/>#}
+
+            <!-- You can add links or content available only for authenticated users here -->
+            <span>{{ user.first_name }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn" type="submit">خروج</button>
+            </form>
+        {% else %}
+            <span><a class="btn" href="{% url 'login' %}">ورود</a></span>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
