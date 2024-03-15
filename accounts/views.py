@@ -1,8 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-
-from accounts.forms import SignUpForm, LoginForm, PostForm
+from accounts.forms import SignUpForm, LoginForm, PostForm, EditProfileForm
 from accounts.models import Post, User, Comment
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
@@ -62,10 +62,13 @@ class UserProfile(View):
         user = get_object_or_404(User, username=username)
         posts = Post.objects.filter(author=user)
         post_count = posts.count()
+        # if request.user.is_authenticated:
         itself = request.user.username == username
-        followed = request.user.follows.filter(username=username).count()
-        followers = request.user.followers.count()
-        following = request.user.follows.count()
+        followed = False
+        if request.user.is_authenticated:
+            followed = request.user.follows.filter(username=username).count()
+        followers = user.followers.count()
+        following = user.follows.count()
         return render(request, 'accounts/profile.html',
                       {'user_profile': user, 'posts': posts, 'postCount': post_count, 'followed': followed,
                        'following': following, 'followers': followers, 'itself': itself})
@@ -81,7 +84,7 @@ class comment(View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-class Follow(View):
+class Follow(LoginRequiredMixin, View):
     def post(self, request):
         username = request.POST.get('to')
         user = request.user
@@ -95,9 +98,10 @@ class Follow(View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-class EditProfile(View):
+class EditProfile(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'accounts/editProfile.html')
+        user_form = EditProfileForm(instance=request.user)
+        return render(request, 'accounts/editProfile.html', {'user_form': user_form})
         pass
 
     def post(self, request):
@@ -156,5 +160,3 @@ class CreatePost(View):
                 post.image = image
                 post.save()
         return redirect('/index/')
-
-

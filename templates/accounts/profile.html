@@ -100,7 +100,7 @@
             <div class=" actions">
                 <ul>
                     <li><span>followers {{ followers }}</span></li>
-                    <li><span>following {{ followed }}</span></li>
+                    <li><span>following {{ following }}</span></li>
                     <li><span>tweets {{ postCount }}</span></li>
                     <form method="post" action="{% url 'follow' %}">
                         {% csrf_token %}
@@ -152,19 +152,20 @@
                         <li><span>+</span></li>
                     </ul>
                 </div>
-                <div class="user-info" style="padding:24px;	border-bottom: 2px dashed #00142966;
-">
-                    <img
-                            class="user-image"
-                            src="{% static 'accounts/assets/images/user.jpg' %}"
-                            alt="user image"
-                    />
+                {% for comment in post.comment_set.all %}
+                    <div class="user-info" style="padding:24px;	border-bottom: 2px dashed #00142966;">
+                        <img
+                                class="user-image"
+                                src="{{ comment.author.picture.url }}"
+                                alt="user image"
+                        />
 
-                    <div class="detail">
-                        <h3>پیری</h3>
-                        <p>خروسای دانشکده مهندسی:</p>
+                        <div class="detail">
+                            <h3>{{ comment.author.first_name }}</h3>
+                            <p>{{ comment.body }}</p>
+                        </div>
                     </div>
-                </div>
+                {% endfor %}
                 <div class="comment-input">
                     <input type="text" placeholder="به نظر من..."/>
                     <button class="btn">کامنت بذار</button>

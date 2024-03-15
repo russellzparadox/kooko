@@ -58,3 +58,32 @@ class PostForm(forms.Form):
     image = forms.ImageField(required=False)
 
     # username = forms.CharField(max_length=100, label="")
+
+
+class EditProfileForm(forms.ModelForm):
+    # description = forms.CharField(widget=forms.Textarea, required=False)
+    # picture = forms.ImageField(required=False)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # lable_text = {
+        #     'username': 'نام کاربری',
+        #     'first_name': 'نام',
+        #     'last_name': 'نام خانوادگی',
+        #     'email': 'ایمیل',
+        #     'password': 'رمز عبور',
+        #     'description': 'توضیحات'
+        # }
+        self.fields.update({
+            'username': forms.CharField(label='نام کاربری', help_text=None),
+            'email': forms.EmailField(label='ایمیل'),
+            'first_name': forms.CharField(label='نام'),
+            'last_name': forms.CharField(label='نام خانوادگی'),
+            'password': forms.CharField(widget=forms.PasswordInput(), label='رمز عبور', required=False),
+            'description': forms.CharField(widget=forms.Textarea(), label='توضیحات', required=False)
+        })
+
+    # password = forms.CharField(widget=forms.PasswordInput(), required=False)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'username', 'email', 'description')
