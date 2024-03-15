@@ -100,6 +100,22 @@ class EditProfile(View):
         return render(request, 'accounts/editProfile.html')
         pass
 
+    def post(self, request):
+        firstname = request.POST.get('first_name', None)
+        lastname = request.POST.get('last_name', None)
+        email = request.POST.get('email', None)
+        description = request.POST.get('description', None)
+        pp = request.FILES.get('pp', None)
+        user = User.objects.get(username=request.user.username)
+        user.first_name = firstname
+        user.lastname = lastname
+        user.email = email
+        user.description = description
+        if pp:
+            user.picture = pp
+        user.save()
+        return redirect('/index/')
+
 
 class Register(View):
     def get(self, request):
@@ -134,9 +150,11 @@ class CreatePost(View):
         form = PostForm(request.POST)
         if form.is_valid():
             body = form.cleaned_data['body']
-            image = request.FILES['image']  # Get the uploaded image
+            image = request.FILES.get('image', None)
             post = Post.objects.create(body=body, author=request.user)
             if image:
                 post.image = image
                 post.save()
         return redirect('/index/')
+
+

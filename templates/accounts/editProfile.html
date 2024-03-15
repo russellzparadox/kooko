@@ -53,8 +53,7 @@
             max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            {#background-color: #f9f9f9;#}
-            border-radius: 8px;
+        {#background-color: #f9f9f9;#} border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -72,14 +71,8 @@
         }
 
         .edit-profile-form button {
-            {#display: block;#}
-            width: 100%;
-            {#padding: 10px;#}
-            {#background-color: #007bff;#}
-            {#color: #fff;#}
-            {#border: none;#}
-            {#border-radius: 4px;#}
-            {#cursor: pointer;#}
+        {#display: block;#} width: 100%;
+        {#padding: 10px;#}{#background-color: #007bff;#}{#color: #fff;#}{#border: none;#}{#border-radius: 4px;#}{#cursor: pointer;#}
         }
 
         .edit-profile-form button:hover {
@@ -97,16 +90,75 @@
             font-family: "iransansRegular";
         }
 
+
+        .wrapperu {
+
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+            .file-upload {
+
+                height: 100px;
+                width: 100px;
+                border-radius: 100px;
+                position: relative;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                border: 4px solid #ffffff;
+                overflow: hidden;
+                background-image: linear-gradient(to bottom, #2590EB 50%, #ffffff 50%);
+                background-size: 100% 200%;
+                transition: all 1s;
+                color: #ffffff;
+                font-size: 50px;
+
+                input[type='file'] {
+
+                    height: 100px;
+                    width: 100px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    cursor: pointer;
+
+                }
+
+                &:hover {
+
+                    background-position: 0 -100%;
+
+                    color: #2590EB;
+
+                }
+
+
+            }
+        }
+
     </style>
+    {#    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>#}
+    {#    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css'>#}
+    {#    <link rel="stylesheet" href="{% static 'accounts/styles/style.css' %}">#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 {% endblock %}
 
 {% block content %}
     <div class="profile-container box">
+
         <img src="{{ user.picture.url }}" alt="Profile Image" class="profile-image">
         <div class="profile-info">
             <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
             <p class="profile-description">ویرایش اطلاعات پروفایل</p>
-            <form class="edit-profile-form" method="post" enctype="multipart/form-data">
+            <form class="edit-profile-form" action="{% url 'editprofile' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <label for="first_name">نام</label>
                 <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}">
@@ -117,9 +169,16 @@
                 <label for="description">توضیحات</label>
                 <textarea id="description" name="description">{{ user.description }}</textarea>
                 <label for="picture">تصویر پروفایل</label>
-                <input type="file" id="picture" name="picture">
+                {#                <input type="file" id="picture" name="picture">#}
+                <div class="wrapperu" style="margin-bottom: 24px">
+                    <div class="file-upload">
+                        <input type="file" accept=".jpg,.png" name="pp"/>
+                        <i class="fa fa-arrow-up"></i>
+                    </div>
+                </div>
                 <button class="btn" type="submit">ذخیره تغییرات</button>
             </form>
         </div>
+        {#        </div>#}
     </div>
 {% endblock %}

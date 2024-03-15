@@ -67,7 +67,9 @@
 
     <div class="profile box">
         {% if user.is_authenticated %}
-            <img src="{{ user.picture.url }}" alt="user image">
+            <a href="{% url 'editprofile' %}">
+                <img src="{{ user.picture.url }}" alt="user image">
+            </a>
             {#        <img src="{% static 'accounts/assets/images/user.jpg' %}" alt="user image"/>#}
 
             <!-- You can add links or content available only for authenticated users here -->
