@@ -40,7 +40,7 @@ class Post(models.Model):
     likeCount = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        if self.image:
+        if self.pk is  None and self.image:
             # Rename the image to username_timestamp
             file_name, file_ext = os.path.splitext(os.path.basename(self.image.name))
 

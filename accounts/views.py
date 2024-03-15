@@ -52,7 +52,7 @@ class Like(LoginRequiredMixin, View):
         Likes.objects.create(user=request.user, post=kook)
         kook.likeCount = kook.likeCount + 1
         kook.save()
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return redirect('/index')
 
 
 class Login(View):
@@ -129,7 +129,6 @@ class EditProfile(LoginRequiredMixin, View):
     def post(self, request):
         user_form = EditProfileForm(request.POST, instance=request.user)
         pp = request.FILES.get('pp', None)
-        user = User.objects.get(username=request.user.username)
 
         # if user_form.is_valid() and profile_form.is_valid():
         #     user_form.save()
@@ -144,7 +143,9 @@ class EditProfile(LoginRequiredMixin, View):
         # user.lastname = lastname
         # user.email = email
         # user.description = description
-
+        if user_form.is_valid():
+            user_form.save()
+        user = User.objects.get(username=request.user.username)
         if pp:
             user.picture = pp
         user.save()
