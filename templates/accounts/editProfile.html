@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block style %}
+    {#    <link rel="stylesheet" href="{% static 'accounts/styles/login.css' %}">#}
     <style>
         /* Add/Edit Profile Styles */
         .profile-container {
@@ -52,7 +53,7 @@
             max-width: 500px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f9f9f9;
+            {#background-color: #f9f9f9;#}
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -66,31 +67,41 @@
         .edit-profile-form input[type="text"],
         .edit-profile-form input[type="email"] {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
+        {#padding: 10px;#} margin-bottom: 20px;
+        {#border-radius: 4px;#}{#border: 1px solid #ccc;#}
         }
 
         .edit-profile-form button {
-            display: block;
+            {#display: block;#}
             width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            {#padding: 10px;#}
+            {#background-color: #007bff;#}
+            {#color: #fff;#}
+            {#border: none;#}
+            {#border-radius: 4px;#}
+            {#cursor: pointer;#}
         }
 
         .edit-profile-form button:hover {
             background-color: #0056b3;
         }
+
+        textarea,
+        input[type="text"], input[type="password"], input[type="email"] {
+            border: 2px solid #00142999;
+            padding: 12px 16px;
+            width: 100%;
+            font-size: 24px;
+            border-radius: var(--border-radius-1);
+            line-height: 32px;
+            font-family: "iransansRegular";
+        }
+
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="profile-container">
+    <div class="profile-container box">
         <img src="{{ user.picture.url }}" alt="Profile Image" class="profile-image">
         <div class="profile-info">
             <h1 class="profile-name">{{ user.first_name }} {{ user.last_name }}</h1>
