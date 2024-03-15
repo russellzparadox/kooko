@@ -146,7 +146,14 @@
                 {% endif %}
                 <div class=" actions">
                     <ul>
-                        <li><span>120 👍</span></li>
+                        <li>
+                            <a href="{% url 'like' pk=post.pk %}">
+                                {#                            <form method="post" action="{% url 'like' %}">#}
+                                <input name="pk" type="hidden" value="{{ post.pk }}">
+                                <span>{{ post.likeCount }} 👍</span>
+                                {#                            </form>#}
+                            </a>
+                        </li>
                         <li><span>960 👀</span></li>
                         <li><span>120 ❤️</span></li>
                         <li><span>+</span></li>
