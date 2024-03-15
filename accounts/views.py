@@ -19,7 +19,7 @@ class Index(View):
         return render(request, 'accounts/index.html', {'form': form, 'posts': posts})
 
 
-class CommentView(View):
+class CommentView(LoginRequiredMixin, View):
     def post(self, request):
         body = request.POST.get('comment')
         post_id = request.POST.get('post')
@@ -33,7 +33,7 @@ class RedirectIndex(View):
         return redirect('/index/')
 
 
-def logout(request):
+def logout(LoginRequiredMixin, request):
     auth_logout(request)
     return redirect('/index/')
 
@@ -75,7 +75,7 @@ class UserProfile(View):
         # user = User.objects.get(username=username)
 
 
-class comment(View):
+class comment(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         body = request.POST.get('body')
         parent_id = request.POST.get('parent')
@@ -149,7 +149,7 @@ class Register(View):
         return render(request, 'accounts/login.html', {'form': form, "login": False})
 
 
-class CreatePost(View):
+class CreatePost(LoginRequiredMixin, View):
     def post(self, request):
         form = PostForm(request.POST)
         if form.is_valid():
