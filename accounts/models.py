@@ -15,7 +15,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def save(self, *args, **kwargs):
-        if self.picture:
+        if self.pk is not None and self.picture:
             # Rename the image to username_timestamp
             file_name, file_ext = os.path.splitext(os.path.basename(self.picture.name))
             current_timestamp = datetime.now()

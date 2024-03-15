@@ -33,7 +33,7 @@ class RedirectIndex(View):
         return redirect('/index/')
 
 
-def logout(LoginRequiredMixin, request):
+def logout(request):
     auth_logout(request)
     return redirect('/index/')
 
