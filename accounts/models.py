@@ -10,6 +10,7 @@ class User(AbstractUser):
     picture = models.ImageField(upload_to='media/user_pictures/', default='user_pictures/piri.png')
     email = models.EmailField(unique=True)
     description = models.TextField(null=True, blank=True)
+    follows = models.ManyToManyField('accounts.User', related_name='followers')
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def __str__(self):
@@ -33,3 +34,10 @@ class Post(models.Model):
             new_filename = f"{self.author.username}_{self.timestamp.strftime('%Y%m%d%H%M%S')}{file_ext}"
             self.image.name = new_filename
         super().save(*args, **kwargs)
+
+
+class Comment(models.Model):
+    body = models.TextField()
+    parent = models.ForeignKey(Post, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)

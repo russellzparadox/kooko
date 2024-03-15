@@ -1,8 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from accounts.forms import SignUpForm, LoginForm, PostForm
-from accounts.models import Post, User
+from accounts.models import Post, User, Comment
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 
@@ -13,8 +14,18 @@ from django.contrib.auth import logout as auth_logout
 class Index(View):
     def get(self, request):
         posts = Post.objects.all()
+        # posts.comments.all()
         form = PostForm()
         return render(request, 'accounts/index.html', {'form': form, 'posts': posts})
+
+
+class CommentView(View):
+    def post(self, request):
+        body = request.POST.get('comment')
+        post_id = request.POST.get('post')
+        post = Post.objects.get(pk=post_id)
+        Comment.objects.create(body=body, parent=post, author=request.user)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class RedirectIndex(View):
@@ -50,13 +61,43 @@ class UserProfile(View):
         username = kwargs.get('username')
         user = get_object_or_404(User, username=username)
         posts = Post.objects.filter(author=user)
-        postCount = posts.count()
-        return render(request, 'accounts/profile.html', {'user': user, 'posts': posts, 'postCount': postCount})
+        post_count = posts.count()
+        itself = request.user.username == username
+        followed = request.user.follows.filter(username=username).count()
+        followers = request.user.followers.count()
+        following = request.user.follows.count()
+        return render(request, 'accounts/profile.html',
+                      {'user_profile': user, 'posts': posts, 'postCount': post_count, 'followed': followed,
+                       'following': following, 'followers': followers, 'itself': itself})
         # user = User.objects.get(username=username)
+
+
+class comment(View):
+    def post(self, request, *args, **kwargs):
+        body = request.POST.get('body')
+        parent_id = request.POST.get('parent')
+        post = Post.objects.get(id=parent_id)
+        comment = Comment.objects.create(body=body, author=request.user, parent=post)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
+class Follow(View):
+    def post(self, request):
+        username = request.POST.get('to')
+        user = request.user
+        user2 = User.objects.get(username=username)
+        if user2.username == user.username:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        if user.follows.filter(username=username):
+            user.follows.remove(user2)
+        else:
+            user.follows.add(user2)
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class EditProfile(View):
     def get(self, request, *args, **kwargs):
+        return render(request, 'accounts/editProfile.html')
         pass
 
 

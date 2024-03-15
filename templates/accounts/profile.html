@@ -82,13 +82,13 @@
                 <img
                         class="user-image"
                         {#                                src="{% static 'accounts/assets/images/user.jpg' %}"#}
-                        src="{{ user.picture.url }}"
+                        src="{{ user_profile.picture.url }}"
                         alt="user image"
                 />
 
                 <div class="detail">
-                    <h3>{{ user.first_name }} {{ user.last_name }}</h3>
-                    <p>{{ user.description }}</p>
+                    <h3>{{ user_profile.first_name }} {{ user_profile.last_name }}</h3>
+                    <p>{{ user_profile.description }}</p>
                     {#                    <ul class="profile-stats">#}
                     {#                        <li><strong>500</strong> Tweets</li>#}
                     {#                        <li><strong>20K</strong> Followers</li>#}
@@ -99,9 +99,23 @@
             </div>
             <div class=" actions">
                 <ul>
-                    <li><span>followers 200</span></li>
-                    <li><span>following 300</span></li>
+                    <li><span>followers {{ followers }}</span></li>
+                    <li><span>following {{ followed }}</span></li>
                     <li><span>tweets {{ postCount }}</span></li>
+                    <form method="post" action="{% url 'follow' %}">
+                        {% csrf_token %}
+                        {#                        <input type="hidden" value="{{ user.username }}" name="from">#}
+                        <input type="hidden" value="{{ user_profile.username }}" name="to">
+                        <button type="submit" class="btn">
+                            {% if itself %}
+                                edit
+                            {% elif followed %}
+                                Unfollow
+
+                            {% else %}
+                                Follow
+                            {% endif %}</button>
+                    </form>
                 </ul>
             </div>
 
