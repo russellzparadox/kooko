@@ -37,6 +37,7 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='media/posts/', blank=True, null=True)
+    likeCount = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if self.image:
@@ -53,3 +54,8 @@ class Comment(models.Model):
     parent = models.ForeignKey(Post, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Likes(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')

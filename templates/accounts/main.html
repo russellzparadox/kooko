@@ -23,16 +23,22 @@
   gap: 12px;
   align-items: center;
   cursor: pointer;">
-                        <div class="active">
+                        <div class="{% if request.resolver_match.url_name  == 'index' %}active{% endif %}">
                             <img
-                                    src="{% static 'accounts/assets/icons/home.svg' %}"
-                                    alt="home icon"
+                                    {% if request.resolver_match.url_name  != 'index' %}
+                                        style="filter: hue-rotate(200deg) brightness(0.8) saturate(0.8)"
+                                    {% endif %}
+                                        src="{% static 'accounts/assets/icons/home.svg' %}"
+                                        alt="home icon"
                             />
                         </div>
-                        <span>خانه</span>
+                        {% if request.resolver_match.url_name  == 'index' %}
+                            <span>خانه </span>
+                        {% endif %}
                     </a>
                 </li>
                 <li>
+
                     <div>
                         <img
                                 src="{% static 'accounts/assets/icons/Frame 826.svg' %}"
@@ -41,12 +47,26 @@
                     </div>
                 </li>
                 <li>
-                    <div>
-                        <img
-                                src="{% static 'accounts/assets/icons/Frame 827.svg' %}"
-                                alt="user icon"
-                        />
-                    </div>
+                    <a href="{% url 'editprofile' %}" style="display: flex;
+                    flex-direction: column;
+                    gap: 12px;
+                    align-items: center;
+                    cursor: pointer;">
+                        <div {% if  request.resolver_match.url_name  == 'editprofile' %}
+                            class="active"
+                        {% endif %} >
+                            <img {% if  request.resolver_match.url_name  == 'editprofile' %}style="  filter: brightness(100);{% endif %}
+                                 "
+                                 src="{% static 'accounts/assets/icons/Frame 827.svg' %}"
+                                 alt="user icon"
+                            />
+
+                        </div>
+                        {% if  request.resolver_match.url_name  == 'editprofile' %}
+                            <span>پروفایل</span>
+                        {% endif %}
+                    </a>
+
                 </li>
                 <li>
                     <div>
@@ -83,5 +103,8 @@
         {% endif %}
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% block script %}
+{% endblock %}
 </body>
 </html>

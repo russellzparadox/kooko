@@ -13,5 +13,6 @@ urlpatterns = [
     path('user/<str:username>/', views.UserProfile.as_view(), name='userprofile'),
     path('follow/', views.Follow.as_view(), name='follow'),
     path('comment/', CommentView.as_view(), name='comment'),
-    path('edit/', EditProfile.as_view(), name='editprofile')
+    path('edit/', EditProfile.as_view(), name='editprofile'),
+    path('like/<int:pk>', views.Like.as_view(), name='like')
 ]

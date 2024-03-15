@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from accounts.forms import SignUpForm, LoginForm, PostForm, EditProfileForm
-from accounts.models import Post, User, Comment
+from accounts.models import Post, User, Comment, Likes
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as auth_logout
 
@@ -38,12 +38,34 @@ def logout(LoginRequiredMixin, request):
     return redirect('/index/')
 
 
+class Like(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        kook = kwargs.get('pk', None)
+        # kook = request.POST.get('pk', None)
+        kook = Post.objects.get(pk=kook)
+
+        if Likes.objects.filter(user=request.user, post=kook).exists():
+            Likes.objects.filter(user=request.user, post=kook).delete()
+            kook.likeCount = kook.likeCount - 1
+            kook.save()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        Likes.objects.create(user=request.user, post=kook)
+        kook.likeCount = kook.likeCount + 1
+        kook.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
+
 class Login(View):
     def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form, 'login': True})
 
     def post(self, request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -105,16 +127,24 @@ class EditProfile(LoginRequiredMixin, View):
         pass
 
     def post(self, request):
-        firstname = request.POST.get('first_name', None)
-        lastname = request.POST.get('last_name', None)
-        email = request.POST.get('email', None)
-        description = request.POST.get('description', None)
+        user_form = EditProfileForm(request.POST, instance=request.user)
         pp = request.FILES.get('pp', None)
         user = User.objects.get(username=request.user.username)
-        user.first_name = firstname
-        user.lastname = lastname
-        user.email = email
-        user.description = description
+
+        # if user_form.is_valid() and profile_form.is_valid():
+        #     user_form.save()
+        #     profile_form.save()
+        #     return redirect('/index/')
+        #
+        # firstname = request.POST.get('first_name', None)
+        # lastname = request.POST.get('last_name', None)
+        # email = request.POST.get('email', None)
+        # description = request.POST.get('description', None)
+        # user.first_name = firstname
+        # user.lastname = lastname
+        # user.email = email
+        # user.description = description
+
         if pp:
             user.picture = pp
         user.save()
@@ -122,11 +152,18 @@ class EditProfile(LoginRequiredMixin, View):
 
 
 class Register(View):
+
     def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
         form = SignUpForm()
         return render(request, 'accounts/login.html', {'form': form, 'login': False})
 
     def post(self, request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+
         # first_name = request.POST['fname']
         # last_name = request.POST['lname']
         # username = request.POST['uname']
