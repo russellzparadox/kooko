@@ -15,14 +15,14 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
 
     def save(self, *args, **kwargs):
-        if self.pk is not None and self.picture:
-            # Rename the image to username_timestamp
-            file_name, file_ext = os.path.splitext(os.path.basename(self.picture.name))
-            current_timestamp = datetime.now()
-            timestamp_text = current_timestamp.strftime("%Y-%m-%d %H:%M:%S")
-
-            new_filename = f"{self.username}_{timestamp_text}{file_ext}"
-            self.picture.name = new_filename
+        # if self.pk is not None and self.picture:
+        #     # Rename the image to username_timestamp
+        #     file_name, file_ext = os.path.splitext(os.path.basename(self.picture.name))
+        #     current_timestamp = datetime.now()
+        #     timestamp_text = current_timestamp.strftime("%Y-%m-%d %H:%M:%S")
+        #
+        #     new_filename = f"{self.username}_{timestamp_text}{file_ext}"
+        #     self.picture.name = new_filename
         super().save(*args, **kwargs)
 
     def __str__(self):
